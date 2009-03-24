@@ -1,0 +1,51 @@
+{% load i18n inlinetrans %}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><title>Inline Translations Demo</title>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+ <script src="/media/js/jquery-1.2.6.min.js"></script>
+</head>
+
+<style type="text/css">
+body {
+    margin-top: 20px;
+    font-family:Verdana,sans-serif;
+    font-size:12px;
+    font-size-adjust:none;
+    font-style:normal;
+    font-variant:normal;
+    font-weight:normal;
+    line-height:1.4em;
+}
+
+.example-item {
+    margin-bottom: 50px;
+}
+</style>
+
+{% inlinetrans_media %}
+
+<body>
+<div class="example-item">
+    <h1>{% trans "Example: in H2 (click on province)" %}</h1>
+    <h2>{% trans "Inline trans" %}:  {% inline_trans "province" %}</h2>
+    <h2>{% trans "i18n trans" %}: {% trans "province" %}</h2>
+</div> 
+<div class="example-item">
+    <h1>{% trans "Example: in div contain  (click on Add)" %}</h1>
+    <div>{% trans "Inline trans" %}: {% inline_trans "Add" %}</div>
+    <div>{% trans "i18n trans" %}: {% trans "Add" %}</div>
+</div>
+<div class="example-item">
+    <h1>{% trans "Example: msgid don't exists  (click on New word)" %}</h1>
+    <div>{% trans "Inline trans" %}: {% inline_trans "New word" %}</div>
+    <div>{% trans "i18n trans" %}: {% trans "New word" %}</div>
+</div>
+<div class="example-item">
+    <h1>{% trans "Example: in link (click on province)" %}</h1>
+    <a href="/">{% trans "Inline trans" %}: {% inline_trans "province" %}</a>
+    <br />
+    <a href="/">{% trans "i18n trans" %}: {% trans "province" %}</a>
+</div>
+
+</body>
