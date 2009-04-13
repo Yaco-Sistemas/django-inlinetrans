@@ -83,6 +83,6 @@ def inlinetrans_media(context):
     if 'user' in context and context['user'].is_staff:
         return {'is_staff': True,
                 'language': get_language_name(get_language()),
-                'MEDIA_URL': settings.MEDIA_URL}
+                'MEDIA_URL': settings.MEDIA_URL + 'inlinetrans/'}
     else:
         return {'is_staff': False}
