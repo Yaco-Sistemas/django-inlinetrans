@@ -27,16 +27,16 @@ span.restartServer {
     display: none;
 }
 
-span.inlinetransUntranslated {
-    background-color: #FFC0CB;
-}
-
 div.inlinetransContainer .active {
     background-color: #BFBFBF;
 }
 
 span.inlinetransHighlight {
     background-color: #90EE90;
+}
+
+span.inlinetransUntranslated {
+    background-color: #FFC0CB;
 }
 
 img#changes-loading {
