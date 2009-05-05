@@ -27,8 +27,9 @@
             if(answer){
                 var item = $(this);
                 active_loading();
+                jsondata = $.param({msgid:msgid, msgstr:msgstr});
                 $.ajax({
-                    data: "msgid=" + msgid + "&msgstr=" + msgstr,
+                    data: jsondata,
                     url: inlinetrans_set_new_translation_url,
                     type: "POST",
                     async: true,
