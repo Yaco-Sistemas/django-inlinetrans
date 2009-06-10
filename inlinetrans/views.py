@@ -40,8 +40,8 @@ def set_new_translation(request):
             format_errors = validate_format(selected_pofile)
             if poentry and not format_errors:
                 try:
-                    selected_pofile.metadata['Last-Translator'] = str("%s %s <%s>" % (request.user.first_name, request.user.last_name, request.user.email))
-                    selected_pofile.metadata['X-Translated-Using'] = str("inlinetrans %s" % inlinetrans.get_version(False))
+                    selected_pofile.metadata['Last-Translator'] = smart_str("%s %s <%s>" % (request.user.first_name, request.user.last_name, request.user.email))
+                    selected_pofile.metadata['X-Translated-Using'] = smart_str("inlinetrans %s" % inlinetrans.get_version(False))
                     selected_pofile.metadata['PO-Revision-Date'] = datetime.datetime.now().strftime('%Y-%m-%d %H:%M%z')
                 except UnicodeDecodeError:
                     pass
