@@ -276,7 +276,8 @@ def make_messages(locale=None, domain='django', verbosity='1', all=False, extens
                 raise CommandError("errors happened while running msguniq\n%s" % errors)
             open(potfile, 'w').write(msgs)
             if os.path.exists(pofile):
-                (stdin, stdout, stderr) = os.popen3('msgmerge -q "%s" "%s"' % (pofile, potfile), 't')
+                cmd = 'msgmerge -N -q "%s" "%s"' % (pofile, potfile)
+                (stdin, stdout, stderr) = os.popen3(cmd, 't')
                 msgs = stdout.read()
                 errors = stderr.read()
                 if errors:
