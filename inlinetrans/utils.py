@@ -46,21 +46,35 @@ def find_pos(lang, include_djangos = False):
 
     paths = []
 
+    # project/app/locale
+    for appname in reversed(settings.INSTALLED_APPS):
+        appname = str(appname) # to avoid a fail in __import__ sentence
+        p = appname.rfind('.')
+        if p >= 0:
+            app = getattr(__import__(appname[:p], {}, {}, [appname[p+1:]]), appname[p+1:])
+        else:
+            app = __import__(appname, {}, {}, [])
+
+        apppath = os.path.join(os.path.dirname(app.__file__), 'locale')
+
+        if os.path.isdir(apppath):
+            paths.append(apppath)
+
     # project/locale
     parts = settings.SETTINGS_MODULE.split('.')
     project = __import__(parts[0], {}, {}, [])
     paths.append(os.path.join(os.path.dirname(project.__file__), 'locale'))
-
-    # django/locale
-    if include_djangos:
-        paths.append(os.path.join(os.path.dirname(sys.modules[settings.__module__].__file__), 'locale'))
 
     # settings
     for localepath in settings.LOCALE_PATHS:
         if os.path.isdir(localepath):
             paths.append(localepath)
 
-    ret = set()
+    # django/locale
+    if include_djangos:
+        paths.append(os.path.join(os.path.dirname(sys.modules[settings.__module__].__file__), 'locale'))
+
+    ret = []
     rx=re.compile(r'(\w+)/../\1')
     langs = (lang, )
     if u'-' in lang:
@@ -74,6 +88,6 @@ def find_pos(lang, include_djangos = False):
         for lang_ in langs:
             dirname = rx.sub(r'\1', '%s/%s/LC_MESSAGES/' % (path, lang_))
             for fn in ('django.po', 'djangojs.po', ):
-                if os.path.isfile(dirname+fn):
-                    ret.add(os.path.abspath(dirname+fn))
-    return list(ret)
+                if os.path.isfile(dirname+fn) and os.path.abspath((dirname+fn)) not in ret:
+                    ret.append(os.path.abspath(dirname+fn))
+    return ret
