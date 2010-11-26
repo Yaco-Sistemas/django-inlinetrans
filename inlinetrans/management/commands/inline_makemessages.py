@@ -137,7 +137,7 @@ def handle_extensions(extensions=('html',)):
     # trick xgettext to parse them as Python files)
     return set([x for x in ext_list if x != '.py'])
 
-def make_messages(locale=None, domain='django', verbosity='1', all=False, extensions=None, locale_path=None):
+def make_messages(locale=None, domain='django', verbosity='1', all=False, extensions=None, locale_path=None, root_path=None):
     """
     Uses the locale directory from the Django SVN tree or an application/
     project to process all
@@ -206,7 +206,7 @@ def make_messages(locale=None, domain='django', verbosity='1', all=False, extens
             os.unlink(potfile)
 
         all_files = []
-        for (dirpath, dirnames, filenames) in os.walk("."):
+        for (dirpath, dirnames, filenames) in os.walk(root_path):
             all_files.extend([(dirpath, f) for f in filenames])
         all_files.sort()
         for dirpath, file in all_files:
@@ -297,8 +297,10 @@ class Command(BaseCommand):
         make_option('--extension', '-e', dest='extensions',
             help='The file extension(s) to examine (default: ".html", separate multiple extensions with commas, or use -e multiple times)',
             action='append'),
-        make_option('--locale-path', '-p', dest='locale-path', default=None, 
+        make_option('--locale-path', '-p', dest='locale-path', default=None,
             help='Path to your project locale dir. Needed only if you call the command from outside your main project directory.'),
+        make_option('--root-path', '-r', dest='root-path', default='.',
+            help='Root path to find files to include in catalogs.'),
     )
     help = "Runs over the entire source tree of the current directory and pulls out all strings marked for translation. It creates (or updates) a message file in the conf/locale (in the django tree) or locale (for project and application) directory."
 
@@ -315,6 +317,7 @@ class Command(BaseCommand):
         process_all = options.get('all')
         extensions = options.get('extensions') or ['html']
         locale_path = options.get('locale-path')
+        root_path = options.get('root-path')
 
         if domain == 'djangojs':
             extensions = []
@@ -324,4 +327,4 @@ class Command(BaseCommand):
         if '.js' in extensions:
             raise CommandError("JavaScript files should be examined by using the special 'djangojs' domain only.")
 
-        make_messages(locale, domain, verbosity, process_all, extensions, locale_path)
+        make_messages(locale, domain, verbosity, process_all, extensions, locale_path, root_path)
