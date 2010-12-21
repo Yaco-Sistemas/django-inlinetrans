@@ -1,0 +1,1 @@
+inlinetrans https://django-inlinetrans.googlecode.com/svn/trunk/django-inlinetrans/djangoinlinetrans/inlinetrans
