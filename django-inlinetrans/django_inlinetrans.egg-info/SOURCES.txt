@@ -1,0 +1,9 @@
+setup.cfg
+setup.py
+django_inlinetrans.egg-info/PKG-INFO
+django_inlinetrans.egg-info/SOURCES.txt
+django_inlinetrans.egg-info/dependency_links.txt
+django_inlinetrans.egg-info/entry_points.txt
+django_inlinetrans.egg-info/top_level.txt
+django_inlinetrans.egg-info/zip-safe
+djangoinlinetrans/__init__.py
