@@ -1,0 +1,46 @@
+div.inlinetransContainer {
+    display: inline;
+    height: 16px;
+    border: #DDDDDD solid 1px;
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    z-index : 1000;
+    float: right;
+    background-color: #EDEDED;
+    font-family: sans-serif;
+    font-size: 11px;
+}
+
+span.showInlinetransBar {
+    cursor: pointer;
+    padding: 1px 3px 2px 3px;
+}
+
+span.inlinetransAction {
+    padding: 0 5px 0 5px;
+    cursor: pointer;
+}
+
+span.inlinetransActions,
+span.restartServer {
+    display: none;
+}
+
+div.inlinetransContainer .active {
+    background-color: #BFBFBF;
+}
+
+span.inlinetransHighlight {
+    background-color: #90EE90;
+}
+
+span.inlinetransUntranslated {
+    background-color: #FFC0CB;
+}
+
+img#changes-loading {
+    display: none;
+    width: 16px;
+    height: 16px;
+}
