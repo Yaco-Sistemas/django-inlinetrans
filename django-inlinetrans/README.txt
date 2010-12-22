@@ -1,10 +1,8 @@
-============
 Introduction
 ============
 
 Inlinetrans is a django application that allows the translation of django templates from the rendered html in the browser. Once you have your templates internationalized with inlinetrans, you can click on the untranslated messages in their corresponding web pages to add their translations. This can be of great help for translators, as they will be able to translate the messages right in their intended context.
 
-========
 Features
 ========
 
@@ -18,7 +16,6 @@ Then, you click on a marked message, and are prompted for its translation; on en
 
 Once you have translated all messages in a page, you can click on "apply changes" on the translation bar. This forces a restart on the server, and the reloading of the page with the translations applied.
 
-============
 Requirements
 ============
 
@@ -26,7 +23,6 @@ To use inlinetrans, you need:
 
 - Jquery-1.2.6
 
-=================
 Using inlinetrans
 =================
 
