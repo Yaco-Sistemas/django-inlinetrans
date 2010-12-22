@@ -1,6 +1,6 @@
 Metadata-Version: 1.0
 Name: django-inlinetrans
-Version: 0.1dev-r25
+Version: 0.1dev-r26
 Summary: Is a django application that allows the translation of django templtes from the rendered html in the browser
 Home-page: http://code.google.com/p/django-inlinetrans/
 Author: Antonio Pérez-Aranda Alcaide
