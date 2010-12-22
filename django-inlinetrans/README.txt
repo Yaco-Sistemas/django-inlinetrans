@@ -28,56 +28,41 @@ Using inlinetrans
 
 Make sure media from inlinetrans is accessible in path:
 
-.. code-block:: python
-
-  {{ MEDIA_URL }}inlinetrans
+   >>> {{ MEDIA_URL }}inlinetrans
 
 
 You need to do a checkout of inlinetrans media on media path of your project or setting property externals on your media path.
 
-.. code-block:: bash
-
-  svn checkout http://django-inlinetrans.googlecode.com/svn/trunk/inlinetrans/media inlinetrans
+   >>> svn checkout http://django-inlinetrans.googlecode.com/svn/trunk/inlinetrans/media inlinetrans
 
 
 Make sure you load inlinetrans in all templates you want to internationalize, by adding the following code:
 
-.. code-block:: django
-
+    >>>
     {% load inlinetrans %}
-
     {% inlinetrans_media %}
-
 
 
 Then, you can use:
 
-.. code-block:: django
-
-    {% inline_trans "translate this" %}
+    >>> {% inline_trans "translate this" %}
 
 
 Instead of:
 
-.. code-block:: django
-
-    {% trans "translate this" %}
+    >>> {% trans "translate this" %}
 
 
 Inlinetrans adds html code to each translation, so make sure you don't use **inline_trans** tags inside html attributes, such as this:
 
-.. code-block:: html+django
-
-     <a href="#" alt="{% inline_trans "translate this" %}"></a>
+    >>> <a href="#" alt="{% inline_trans "translate this" %}"></a>
 
 
 In these cases you have to use the regular **trans** tag.
 
 Once your template is internationalized, you run the following command:
 
-.. code-block:: bash
-
-     $ ./manage.py inline_makemessages
+    >>> $ ./manage.py inline_makemessages
 
 
 This extracts both **inline_trans** and **trans** messages from the templates, and incorporates them to the gettext catalogs, just as makemessages does for **trans** messages.
