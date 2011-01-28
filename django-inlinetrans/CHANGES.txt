@@ -1,3 +1,8 @@
+0.2 (2011-01-28)
+----------------
+
+- Created itrans templatetag, an alias for inline_trans.
+
 0.1 (2010-12-21)
 ----------------
 

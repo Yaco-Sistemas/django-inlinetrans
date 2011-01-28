@@ -76,6 +76,7 @@ def inline_trans(parser, token):
     return InlineTranslateNode(value, noop)
 
 register.tag('inline_trans', inline_trans)
+register.tag('itrans', inline_trans)
 
 
 @register.inclusion_tag('inlinetrans/inline_header.html', takes_context=True)
