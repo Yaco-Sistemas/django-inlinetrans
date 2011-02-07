@@ -1,6 +1,7 @@
 import os
 import datetime
 
+from django.conf import settings
 from django.http import HttpResponseBadRequest
 from django.template import RequestContext
 from django.shortcuts import render_to_response
@@ -63,7 +64,7 @@ def inline_demo(request):
     """
     """
     return render_to_response('inlinetrans/inline_demo.html',
-                              {},
+                              {'INLINETRANS_MEDIA_URL': settings.MEDIA_URL + 'inlinetrans/'},
                               context_instance=RequestContext(request))
 
 

@@ -1,3 +1,8 @@
+0.3 (2011-01-28)
+----------------
+
+- Refactored code to be more reusable and customizable from javascript. It's now more like a jquery plugin.
+
 0.2 (2011-01-28)
 ----------------
 

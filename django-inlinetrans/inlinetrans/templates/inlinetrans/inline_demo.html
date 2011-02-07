@@ -3,7 +3,7 @@
 <html><title>Inline Translations Demo</title>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
- <script src="/media/js/jquery-1.2.6.min.js"></script>
+ <script src="http://code.jquery.com/jquery-1.5.min.js"></script>
 </head>
 
 <style type="text/css">
@@ -24,12 +24,15 @@ body {
 </style>
 
 {% inlinetrans_media %}
+<div id="inlinetrans-toolbar">place holder for inlinetrans toolbar</div>
+
+{% inlinetrans_toolbar "inlinetrans-toolbar" %}
 
 <body>
 <div class="example-item">
-    <h1>{% trans "Example: in H2 (click on province)" %}</h1>
-    <h2>{% trans "Inline trans" %}:  {% inline_trans "province" %}</h2>
-    <h2>{% trans "i18n trans" %}: {% trans "province" %}</h2>
+    <h1>{% trans "Example: in H2 (click on home)" %}</h1>
+    <h2>{% trans "Inline trans" %}:  {% inline_trans "Home" %}</h2>
+    <h2>{% trans "i18n trans" %}: {% trans "Home" %}</h2>
 </div> 
 <div class="example-item">
     <h1>{% trans "Example: in div contain  (click on Add)" %}</h1>

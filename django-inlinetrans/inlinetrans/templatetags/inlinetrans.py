@@ -84,6 +84,17 @@ def inlinetrans_media(context):
     if 'user' in context and context['user'].is_staff:
         return {'is_staff': True,
                 'language': get_language_name(get_language()),
-                'MEDIA_URL': settings.MEDIA_URL + 'inlinetrans/'}
+                'INLINETRANS_MEDIA_URL': settings.MEDIA_URL + 'inlinetrans/'}
+    else:
+        return {'is_staff': False,
+                'INLINETRANS_MEDIA_URL': settings.MEDIA_URL + 'inlinetrans/'}
+
+
+@register.inclusion_tag('inlinetrans/inline_toolbar.html', takes_context=True)
+def inlinetrans_toolbar(context, node_id):
+    if 'user' in context and context['user'].is_staff:
+        return {'is_staff': True,
+                'language': get_language_name(get_language()),
+                'node_id': node_id}
     else:
         return {'is_staff': False}
