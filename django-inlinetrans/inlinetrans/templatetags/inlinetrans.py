@@ -12,6 +12,10 @@ from django.utils.translation.trans_real import catalog
 register = template.Library()
 
 
+def get_media_url():
+    return settings.MEDIA_URL + 'inlinetrans/'
+
+
 def get_language_name(lang):
     for lang_code, lang_name in settings.LANGUAGES:
         if lang == lang_code:
@@ -84,10 +88,10 @@ def inlinetrans_media(context):
     if 'user' in context and context['user'].is_staff:
         return {'is_staff': True,
                 'language': get_language_name(get_language()),
-                'INLINETRANS_MEDIA_URL': settings.MEDIA_URL + 'inlinetrans/'}
+                'INLINETRANS_MEDIA_URL': get_media_url()}
     else:
         return {'is_staff': False,
-                'INLINETRANS_MEDIA_URL': settings.MEDIA_URL + 'inlinetrans/'}
+                'INLINETRANS_MEDIA_URL': get_media_url()}
 
 
 @register.inclusion_tag('inlinetrans/inline_toolbar.html', takes_context=True)
@@ -95,6 +99,8 @@ def inlinetrans_toolbar(context, node_id):
     if 'user' in context and context['user'].is_staff:
         return {'is_staff': True,
                 'language': get_language_name(get_language()),
-                'node_id': node_id}
+                'node_id': node_id,
+                'INLINETRANS_MEDIA_URL': get_media_url()}
     else:
-        return {'is_staff': False}
+        return {'is_staff': False,
+                'INLINETRANS_MEDIA_URL': get_media_url()}
