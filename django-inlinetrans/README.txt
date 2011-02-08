@@ -26,15 +26,15 @@ To use inlinetrans, you need:
 Using inlinetrans
 =================
 
-Make sure media from inlinetrans is accessible in path:
+Make sure media from inlinetrans is accessible in path::
 
    >>> {{ MEDIA_URL }}inlinetrans
 
-You need to do a checkout of inlinetrans media on media path of your project or setting property externals on your media path.
+You need to do a checkout of inlinetrans media on media path of your project or setting property externals on your media path::
 
    >>> svn checkout http://django-inlinetrans.googlecode.com/svn/trunk/inlinetrans/media inlinetrans
 
-Make sure you load inlinetrans in all templates you want to internationalize, by adding the following code:
+Make sure you load inlinetrans in all templates you want to internationalize, by adding the following code::
 
     >>>
     {% load inlinetrans %}
@@ -42,15 +42,15 @@ Make sure you load inlinetrans in all templates you want to internationalize, by
     <div id="inlinetrans-toolbar">place holder for inlinetrans toolbar</div>
     {% inlinetrans_toolbar "inlinetrans-toolbar" %}
 
-Then, you can use:
+Then, you can use::
 
     >>> {% inline_trans "translate this" %}
 
-Instead of:
+Instead of::
 
     >>> {% trans "translate this" %}
 
-Also, you can customize the toolbar and other parameters using inlinetrans as follow:
+Also, you can customize the toolbar and other parameters using inlinetrans as follow::
 
     {% load i18n inlinetrans %}
 
@@ -86,13 +86,13 @@ Also, you can customize the toolbar and other parameters using inlinetrans as fo
     })(jQuery);
     </script>
 
-Inlinetrans adds html code to each translation, so make sure you don't use **inline_trans** tags inside html attributes, such as this:
+Inlinetrans adds html code to each translation, so make sure you don't use **inline_trans** tags inside html attributes, such as this::
 
     >>> <a href="#" alt="{% inline_trans "translate this" %}"></a>
 
 In these cases you have to use the regular **trans** tag.
 
-Once your template is internationalized, you run the following command:
+Once your template is internationalized, you run the following command::
 
     >>> $ ./manage.py inline_makemessages
 
