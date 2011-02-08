@@ -9,11 +9,6 @@ version = '0.3'
 long_description = (
     read('README.txt')
     + '\n' +
-    'Detailed Documentation\n'
-    '**********************\n'
-    + '\n' +
-    read('README.txt')
-    + '\n' +
     'Contributors\n'
     '************\n'
     + '\n' +

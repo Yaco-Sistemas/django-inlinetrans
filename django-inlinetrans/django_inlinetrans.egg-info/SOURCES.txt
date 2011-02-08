@@ -22,6 +22,7 @@ inlinetrans/media/img/ajax-loader-transparent.gif
 inlinetrans/media/js/jquery.inlinetrans.js
 inlinetrans/templates/inlinetrans/inline_demo.html
 inlinetrans/templates/inlinetrans/inline_header.html
+inlinetrans/templates/inlinetrans/inline_toolbar.html
 inlinetrans/templates/inlinetrans/inline_trans.html
 inlinetrans/templates/inlinetrans/response.html
 inlinetrans/templatetags/__init__.py
