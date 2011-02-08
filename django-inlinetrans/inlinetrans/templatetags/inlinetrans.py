@@ -85,22 +85,35 @@ register.tag('itrans', inline_trans)
 
 @register.inclusion_tag('inlinetrans/inline_header.html', takes_context=True)
 def inlinetrans_media(context):
+    tag_context = {
+        'is_staff': False,
+        'INLINETRANS_MEDIA_URL': get_media_url(),
+        'request': context['request'],
+    }
     if 'user' in context and context['user'].is_staff:
-        return {'is_staff': True,
-                'language': get_language_name(get_language()),
-                'INLINETRANS_MEDIA_URL': get_media_url()}
-    else:
-        return {'is_staff': False,
-                'INLINETRANS_MEDIA_URL': get_media_url()}
+        tag_context.update({
+            'is_staff': True,
+            'language': get_language_name(get_language()),
+        })
+    return tag_context
 
 
 @register.inclusion_tag('inlinetrans/inline_toolbar.html', takes_context=True)
 def inlinetrans_toolbar(context, node_id):
+    tag_context = {
+        'INLINETRANS_MEDIA_URL': get_media_url(),
+        'request': context['request'],
+    }
     if 'user' in context and context['user'].is_staff:
-        return {'is_staff': True,
-                'language': get_language_name(get_language()),
-                'node_id': node_id,
-                'INLINETRANS_MEDIA_URL': get_media_url()}
+        tag_context.update({
+            'is_staff': True,
+            'language': get_language_name(get_language()),
+            'node_id': node_id,
+        })
     else:
-        return {'is_staff': False,
-                'INLINETRANS_MEDIA_URL': get_media_url()}
+        tag_context.update({
+            'is_staff': False,
+            'INLINETRANS_MEDIA_URL': get_media_url(),
+            'request': context['request'],
+        })
+    return tag_context

@@ -1,4 +1,9 @@
-0.3 (2011-01-28)
+0.3.1 (2011-02-08)
+------------------
+
+- Passed request to context because may be needed for external applications which customize templates.
+
+0.3 (2011-02-07)
 ----------------
 
 - Refactored code to be more reusable and customizable from javascript. It's now more like a jquery plugin.
