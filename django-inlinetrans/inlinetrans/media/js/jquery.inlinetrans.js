@@ -10,6 +10,43 @@
         return this.each(function() {
             $(this).html(toolbar_tpl);
             var some_changes = false;
+            
+            var do_ajax = function(item, msgid, msgstr, retry) {
+                active_loading();
+                var jsondata = $.param({msgid:msgid, msgstr:msgstr, retry:retry});
+                $.ajax({
+                    data: jsondata,
+                    url: new_translation_url,
+                    type: "POST",
+                    async: true,
+                    dataType: "json",
+                    success: function(response){
+                        if (!response.errors) {
+                            if (retry) {
+                               alert(response.message);
+                            }
+                            item.html(msgstr || msgid);
+                            some_changes = true;
+                            disable_loading();
+                            active_restart();
+                        } else if (!response.question) {  // Critical error
+                            alert(response.message);
+                            disable_loading();
+                        } else {  // Allowed to retry
+                            if (confirm(response.message + '\n\n' + response.question)) {
+                                do_ajax(item, msgid, msgstr, true);
+                            } else {
+                                disable_loading();
+                            }
+                        }
+                    },
+                    error: function(response){
+                        alert(messages_dict.error_cant_send);
+                        disable_loading();
+                    }
+                });
+            }
+ 
             var send_translation = function () {
                 var msgid = $(this).attr('rel');
                 var untranslated = false;
@@ -27,24 +64,7 @@
                 }
                 if(answer){
                     var item = $(this);
-                    active_loading();
-                    jsondata = $.param({msgid:msgid, msgstr:msgstr});
-                    $.ajax({
-                        data: jsondata,
-                        url: new_translation_url,
-                        type: "POST",
-                        async: true,
-                        success: function(response){
-                            item.html(msgstr || msgid);
-                            some_changes = true;
-                            disable_loading();
-                            active_restart();
-                        },
-                        error: function(response){
-                            alert(messages_dict.error_cant_send);
-                            disable_loading();
-                        }
-                    });
+                    do_ajax(item, msgid, msgstr, false);
                 }
                 return false;
             }
