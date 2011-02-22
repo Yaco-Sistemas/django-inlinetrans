@@ -1,3 +1,8 @@
+0.3.2 (2011-02-22)
+------------------
+
+- Allow to create/update po files when the msgid is not found in any catalog
+
 0.3.1 (2011-02-08)
 ------------------
 
