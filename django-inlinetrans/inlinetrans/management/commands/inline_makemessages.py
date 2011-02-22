@@ -206,7 +206,11 @@ def make_messages(locale=None, domain='django', verbosity='1', all=False, extens
             os.unlink(potfile)
 
         all_files = []
-        for (dirpath, dirnames, filenames) in os.walk(root_path, followlinks=True):
+        for (dirpath, dirnames, filenames) in os.walk(root_path):
+            for d in dirnames:
+                fulldir = os.path.join(dirpath, d)
+                if os.path.islink(fulldir) and os.path.exists(fulldir):
+                    dirnames[dirnames.index(d)]=os.path.realpath(fulldir)
             all_files.extend([(dirpath, f) for f in filenames])
         all_files.sort()
         for dirpath, file in all_files:
