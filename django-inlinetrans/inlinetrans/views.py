@@ -2,7 +2,7 @@ import os
 import datetime
 
 from django.conf import settings
-from django.http import HttpResponseBadRequest, HttpResponse
+from django.http import HttpResponseBadRequest, HttpResponse, HttpResponseForbidden
 from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.utils import simplejson
@@ -21,6 +21,8 @@ def set_new_translation(request):
     Post to include a new translation for a msgid
     """
 
+    if not request.user.is_staff:
+        return HttpResponseForbidden(_('You have no permission to update translation catalogs'))
     if not request.POST:
         return HttpResponseBadRequest(render_to_response('inlinetrans/response.html',
                                       {'message': _('Invalid request method')},
