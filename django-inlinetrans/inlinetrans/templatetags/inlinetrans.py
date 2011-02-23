@@ -3,8 +3,7 @@ import copy
 from django import template
 from django.conf import settings
 from django.template.loader import render_to_string
-from django.template import TemplateSyntaxError, TokenParser
-from django.templatetags.i18n import TranslateNode
+from django.template import TemplateSyntaxError, TokenParser, Node, Variable
 from django.utils.translation import get_language
 from django.utils.translation.trans_real import catalog
 
@@ -33,10 +32,15 @@ class NotTranslated(object):
         return
 
 
-class InlineTranslateNode(TranslateNode):
+class InlineTranslateNode(Node):
+
+    def __init__(self, filter_expression, noop):
+        self.noop = noop
+        self.filter_expression = filter_expression
+        if isinstance(self.filter_expression.var, basestring):
+            self.filter_expression.var = Variable(u"'%s'" % self.filter_expression.var)
 
     def render(self, context):
-
         if 'user' in context:
             user = context['user']
         elif 'request' in context:
@@ -46,7 +50,7 @@ class InlineTranslateNode(TranslateNode):
         if not (user and user.is_staff):
             return super(InlineTranslateNode, self).render(context)
 
-        msgid = self.value.resolve(context)
+        msgid = self.filter_expression.resolve(context)
         cat = copy.copy(catalog())
         cat.add_fallback(NotTranslated)
         styles = ['translatable']
@@ -77,7 +81,7 @@ def inline_trans(parser, token):
             return (value, noop)
     value, noop = TranslateParser(token.contents).top()
 
-    return InlineTranslateNode(value, noop)
+    return InlineTranslateNode(parser.compile_filter(value), noop)
 
 register.tag('inline_trans', inline_trans)
 register.tag('itrans', inline_trans)

@@ -1,4 +1,4 @@
-VERSION = (0, 1, 'trunk')
+VERSION = (0, 4, 0)
 
 
 def get_version(svn=False):
