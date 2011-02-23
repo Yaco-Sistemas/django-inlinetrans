@@ -1,7 +1,8 @@
-0.4 (2011-02-24)
+0.4.0 (2011-02-24)
 ----------------
 
 - Make compatible with Django 1.2 and 1.3.
+- Allow using filters with the inline_trans tag.
 
 0.3.2 (2011-02-22)
 ------------------
