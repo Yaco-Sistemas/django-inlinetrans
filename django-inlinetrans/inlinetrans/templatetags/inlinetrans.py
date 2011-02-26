@@ -4,6 +4,11 @@ from django import template
 from django.conf import settings
 from django.template.loader import render_to_string
 from django.template import TemplateSyntaxError, TokenParser, Node, Variable
+try:
+    from django.template.base import _render_value_in_context
+except ImportError: # Django 1.1 fallback
+    from django.template import _render_value_in_context
+
 from django.utils.translation import get_language
 from django.utils.translation.trans_real import catalog
 
@@ -48,7 +53,9 @@ class InlineTranslateNode(Node):
         else:
             user = None
         if not (user and user.is_staff):
-            return super(InlineTranslateNode, self).render(context)
+            self.filter_expression.var.translate = not self.noop
+            output = self.filter_expression.resolve(context)
+            return _render_value_in_context(output, context)
 
         msgid = self.filter_expression.resolve(context)
         cat = copy.copy(catalog())
