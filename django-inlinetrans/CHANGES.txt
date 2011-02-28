@@ -2,6 +2,7 @@
 ------------------
 
 - Fixed a bug created in 0.4.0 for anonymous user.
+- Make customizable the media base directory used by inlinetrans.
 
 0.4.0 (2011-02-24)
 ------------------
