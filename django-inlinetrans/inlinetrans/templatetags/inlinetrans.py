@@ -17,7 +17,7 @@ register = template.Library()
 
 
 def get_media_url():
-    return settings.MEDIA_URL + 'inlinetrans/'
+    return getattr(settings, 'INLINETRANS_MEDIA_URL', settings.MEDIA_URL + 'inlinetrans/')
 
 
 def get_language_name(lang):
