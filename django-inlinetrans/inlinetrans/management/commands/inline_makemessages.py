@@ -25,7 +25,7 @@ pythonize_re = re.compile(r'\n\s*//')
 
 from django.utils.translation.trans_real import *
 
-inline_re = re.compile(r"""^\s*(inline_trans|trans)\s+((?:".*?")|(?:'.*?'))\s*""")
+inline_re = re.compile(r"""^\s*(inline_trans|trans|itrans)\s+((?:".*?")|(?:'.*?'))\s*""")
 
 
 def templatize(src):
