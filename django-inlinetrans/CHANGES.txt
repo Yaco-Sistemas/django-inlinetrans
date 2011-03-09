@@ -1,3 +1,8 @@
+0.4.2 (2011-03-09)
+------------------
+
+- ``inline_makemessages`` command was not finding any ``itrans`` templatetag.
+
 0.4.1 (2011-02-27)
 ------------------
 
