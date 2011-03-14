@@ -1,0 +1,138 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-03-14 23:29+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: /home/lin/src/django-apps/django-inlinetrans/django-inlinetrans/inlinetrans/views.py:25
+msgid "You have no permission to update translation catalogs"
+msgstr "No tienes permisos para actualizar los catálogos de traducción"
+
+#: /home/lin/src/django-apps/django-inlinetrans/django-inlinetrans/inlinetrans/views.py:28
+msgid "Invalid request method"
+msgstr "Método de la petición inválida"
+
+#: /home/lin/src/django-apps/django-inlinetrans/django-inlinetrans/inlinetrans/views.py:33
+msgid "Unknow error"
+msgstr "Error desconocido"
+
+#: /home/lin/src/django-apps/django-inlinetrans/django-inlinetrans/inlinetrans/views.py:60
+#, python-format
+msgid "\"%(msgid)s\" not found in any catalog"
+msgstr "No se ha encontrado \"%(msgid)s\" en ningún catálogo"
+
+#: /home/lin/src/django-apps/django-inlinetrans/django-inlinetrans/inlinetrans/views.py:62
+msgid ""
+"Do you want to update the catalog (this could take longer) and try again?"
+msgstr "¿Desea actualizar el catálogo (esto podría tomar tiempo) e intentar de nuevo?"
+
+#: /home/lin/src/django-apps/django-inlinetrans/django-inlinetrans/inlinetrans/views.py:80
+msgid "Catalog updated successfully"
+msgstr "Catálogo actualizado correctamente"
+
+#: /home/lin/src/django-apps/django-inlinetrans/django-inlinetrans/inlinetrans/views.py:82
+msgid "PO entry not found"
+msgstr "Entrada del catálogo PO no encontrada"
+
+#: /home/lin/src/django-apps/django-inlinetrans/django-inlinetrans/inlinetrans/templates/inlinetrans/inline_demo.html.py:33
+msgid "Example: in H2 (click on home)"
+msgstr ""
+
+#: /home/lin/src/django-apps/django-inlinetrans/django-inlinetrans/inlinetrans/templates/inlinetrans/inline_demo.html.py:34
+#: /home/lin/src/django-apps/django-inlinetrans/django-inlinetrans/inlinetrans/templates/inlinetrans/inline_demo.html.py:39
+#: /home/lin/src/django-apps/django-inlinetrans/django-inlinetrans/inlinetrans/templates/inlinetrans/inline_demo.html.py:44
+#: /home/lin/src/django-apps/django-inlinetrans/django-inlinetrans/inlinetrans/templates/inlinetrans/inline_demo.html.py:49
+msgid "Inline trans"
+msgstr ""
+
+#: /home/lin/src/django-apps/django-inlinetrans/django-inlinetrans/inlinetrans/templates/inlinetrans/inline_demo.html.py:34
+#: /home/lin/src/django-apps/django-inlinetrans/django-inlinetrans/inlinetrans/templates/inlinetrans/inline_demo.html.py:35
+msgid "Home"
+msgstr ""
+
+#: /home/lin/src/django-apps/django-inlinetrans/django-inlinetrans/inlinetrans/templates/inlinetrans/inline_demo.html.py:35
+#: /home/lin/src/django-apps/django-inlinetrans/django-inlinetrans/inlinetrans/templates/inlinetrans/inline_demo.html.py:40
+#: /home/lin/src/django-apps/django-inlinetrans/django-inlinetrans/inlinetrans/templates/inlinetrans/inline_demo.html.py:45
+#: /home/lin/src/django-apps/django-inlinetrans/django-inlinetrans/inlinetrans/templates/inlinetrans/inline_demo.html.py:51
+msgid "i18n trans"
+msgstr ""
+
+#: /home/lin/src/django-apps/django-inlinetrans/django-inlinetrans/inlinetrans/templates/inlinetrans/inline_demo.html.py:38
+msgid "Example: in div contain  (click on Add)"
+msgstr ""
+
+#: /home/lin/src/django-apps/django-inlinetrans/django-inlinetrans/inlinetrans/templates/inlinetrans/inline_demo.html.py:39
+#: /home/lin/src/django-apps/django-inlinetrans/django-inlinetrans/inlinetrans/templates/inlinetrans/inline_demo.html.py:40
+msgid "Add"
+msgstr ""
+
+#: /home/lin/src/django-apps/django-inlinetrans/django-inlinetrans/inlinetrans/templates/inlinetrans/inline_demo.html.py:43
+msgid "Example: msgid don't exists  (click on New word)"
+msgstr ""
+
+#: /home/lin/src/django-apps/django-inlinetrans/django-inlinetrans/inlinetrans/templates/inlinetrans/inline_demo.html.py:44
+#: /home/lin/src/django-apps/django-inlinetrans/django-inlinetrans/inlinetrans/templates/inlinetrans/inline_demo.html.py:45
+msgid "New word"
+msgstr ""
+
+#: /home/lin/src/django-apps/django-inlinetrans/django-inlinetrans/inlinetrans/templates/inlinetrans/inline_demo.html.py:48
+msgid "Example: in link (click on province)"
+msgstr ""
+
+#: /home/lin/src/django-apps/django-inlinetrans/django-inlinetrans/inlinetrans/templates/inlinetrans/inline_demo.html.py:49
+#: /home/lin/src/django-apps/django-inlinetrans/django-inlinetrans/inlinetrans/templates/inlinetrans/inline_demo.html.py:51
+msgid "province"
+msgstr ""
+
+#: /home/lin/src/django-apps/django-inlinetrans/django-inlinetrans/inlinetrans/templates/inlinetrans/inline_toolbar.html.py:7
+msgid "Give a new translation for "
+msgstr "Escribe una traducción para "
+
+#: /home/lin/src/django-apps/django-inlinetrans/django-inlinetrans/inlinetrans/templates/inlinetrans/inline_toolbar.html.py:7
+msgid "to"
+msgstr "a"
+
+#: /home/lin/src/django-apps/django-inlinetrans/django-inlinetrans/inlinetrans/templates/inlinetrans/inline_toolbar.html.py:8
+msgid "You're sending an empty translation ¿Are you sure? "
+msgstr "Está enviando una traducción vacía ¿está seguro?"
+
+#: /home/lin/src/django-apps/django-inlinetrans/django-inlinetrans/inlinetrans/templates/inlinetrans/inline_toolbar.html.py:9
+msgid "Reloading"
+msgstr "Recargando"
+
+#: /home/lin/src/django-apps/django-inlinetrans/django-inlinetrans/inlinetrans/templates/inlinetrans/inline_toolbar.html.py:10
+#: /home/lin/src/django-apps/django-inlinetrans/django-inlinetrans/inlinetrans/templates/inlinetrans/inline_toolbar.html.py:25
+msgid "Apply changes"
+msgstr "Aplicar cambios"
+
+#: /home/lin/src/django-apps/django-inlinetrans/django-inlinetrans/inlinetrans/templates/inlinetrans/inline_toolbar.html.py:11
+msgid "Applying changes"
+msgstr "Aplicando cambios"
+
+#: /home/lin/src/django-apps/django-inlinetrans/django-inlinetrans/inlinetrans/templates/inlinetrans/inline_toolbar.html.py:12
+msgid "Can't send translation"
+msgstr "No puedo enviar la traducción"
+
+#: /home/lin/src/django-apps/django-inlinetrans/django-inlinetrans/inlinetrans/templates/inlinetrans/inline_toolbar.html.py:13
+msgid "Can't restart server"
+msgstr "No puedo reiniciar servidor"
+
+#: /home/lin/src/django-apps/django-inlinetrans/django-inlinetrans/inlinetrans/templates/inlinetrans/inline_toolbar.html.py:23
+msgid "See translatable items"
+msgstr "Ver elementos traducibles"
+
+#: /home/lin/src/django-apps/django-inlinetrans/django-inlinetrans/inlinetrans/templates/inlinetrans/inline_toolbar.html.py:24
+msgid "See non translated items"
+msgstr "Ver elementos no traducidos"
