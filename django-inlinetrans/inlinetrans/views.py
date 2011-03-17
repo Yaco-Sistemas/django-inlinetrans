@@ -114,7 +114,7 @@ def do_restart(request):
             command = 'sudo service httpd restart'
 
         elif reload_method.startswith('restart_script'):
-            script = reload_method.split(" ")[1]
+            script = ' '.join(reload_method.split(" ")[1:])
             command = "%s &" % script
         os.system("sleep 2 && %s &> %s & " % (command, reload_log))
 
