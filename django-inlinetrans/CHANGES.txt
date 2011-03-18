@@ -1,3 +1,13 @@
+0.4.6 (2011-03-18)
+------------------
+
+- Fixed translation when the label was found in two or more catalogs. The priority was not calculated well.
+
+0.4.5 (2011-03-17)
+------------------
+
+- Corrected command execution in some environments.
+
 0.4.4 (2011-03-17)
 ------------------
 
