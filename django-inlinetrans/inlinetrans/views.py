@@ -41,7 +41,8 @@ def set_new_translation(request):
         # We try to update the catalog
         if retry != 'false':
             root_path = os.path.dirname(os.path.normpath(os.sys.modules[settings.SETTINGS_MODULE].__file__))
-            make_messages(lang, extensions=['.html'], root_path=root_path)
+            locale_path = os.path.dirname(os.path.normpath(os.sys.modules[settings.SETTINGS_MODULE].__file__))
+            make_messages(lang, extensions=['.html'], root_path=root_path, locale_path=locale_path)
 
         pos = find_pos(lang, include_djangos=True)
         if pos:
