@@ -1,3 +1,8 @@
+0.4.7 (2011-03-22)
+------------------
+
+- Set the locale path, needed if the django server has been launched from outside the project dir.
+
 0.4.6 (2011-03-18)
 ------------------
 

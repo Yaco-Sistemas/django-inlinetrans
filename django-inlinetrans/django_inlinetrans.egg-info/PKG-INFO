@@ -1,6 +1,6 @@
 Metadata-Version: 1.0
 Name: django-inlinetrans
-Version: 0.4.5dev-r55
+Version: 0.4.6dev-r57
 Summary: Is a django application that allows the translation of django templtes from the rendered html in the browser
 Home-page: http://code.google.com/p/django-inlinetrans/
 Author: Antonio Pérez-Aranda Alcaide
@@ -118,6 +118,11 @@ Description: Introduction
         
         Change history
         **************
+        
+        0.4.6 (2011-03-18)
+        ------------------
+        
+        - Fixed translation when the label was found in two or more catalogs. The priority was not calculated well.
         
         0.4.5 (2011-03-17)
         ------------------
