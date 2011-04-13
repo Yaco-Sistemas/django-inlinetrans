@@ -1,6 +1,6 @@
 Metadata-Version: 1.0
 Name: django-inlinetrans
-Version: 0.4.6dev-r57
+Version: 0.4.8dev-r61
 Summary: Is a django application that allows the translation of django templtes from the rendered html in the browser
 Home-page: http://code.google.com/p/django-inlinetrans/
 Author: Antonio Pérez-Aranda Alcaide
@@ -118,6 +118,16 @@ Description: Introduction
         
         Change history
         **************
+        
+        0.4.8 (2011-04-13)
+        ------------------
+        
+        - Send some data to avoid that a proxy/gateway/firewall blocks the POST request if it has no body.
+        
+        0.4.7 (2011-03-22)
+        ------------------
+        
+        - Set the locale path, needed if the django server has been launched from outside the project dir.
         
         0.4.6 (2011-03-18)
         ------------------

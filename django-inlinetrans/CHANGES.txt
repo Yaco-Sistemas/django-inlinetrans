@@ -1,3 +1,8 @@
+0.4.9 (2011-04-13)
+------------------
+
+- Escape msgid so the DOM parser do not replace html entities. This fixes the translation of strings with entities like &copy;
+
 0.4.8 (2011-04-13)
 ------------------
 
