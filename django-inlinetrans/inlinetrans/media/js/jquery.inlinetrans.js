@@ -130,7 +130,7 @@
                         $(this).toggleClass("active");
                         active_loading();
                         $.ajax({
-                                data: "",
+                                data: {restart: 1},
                                 url: restart_url,
                                 type: "POST",
                                 async: true,
