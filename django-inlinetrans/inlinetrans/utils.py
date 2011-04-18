@@ -1,3 +1,4 @@
+from django import VERSION as django_version
 from django.conf import settings
 
 import re
@@ -37,57 +38,92 @@ def validate_format(pofile):
     return errors
 
 
-def find_pos(lang, include_djangos = False):
+def get_ordered_path_list(include_djangos):
+    paths = []
+
+    if django_version[0] < 1 or (django_version[0] == 1 and django_version[1] < 3):  # Before django 1.3
+        # project/locale
+        parts = settings.SETTINGS_MODULE.split('.')
+        project = __import__(parts[0], {}, {}, [])
+        paths.append(os.path.join(os.path.dirname(project.__file__), 'locale'))
+
+        # settings
+        for localepath in reversed(settings.LOCALE_PATHS):
+            if os.path.isdir(localepath):
+                paths.append(localepath)
+
+        # project/app/locale
+        for appname in reversed(settings.INSTALLED_APPS):
+            appname = str(appname)  # to avoid a fail in __import__ sentence
+            p = appname.rfind('.')
+            if p >= 0:
+                app = getattr(__import__(appname[:p], {}, {}, [appname[p + 1:]]), appname[p + 1:])
+            else:
+                app = __import__(appname, {}, {}, [])
+
+            apppath = os.path.join(os.path.dirname(app.__file__), 'locale')
+
+            if os.path.isdir(apppath):
+                paths.append(apppath)
+    else:  # Django 1.3
+        # settings
+        for localepath in settings.LOCALE_PATHS:
+            if os.path.isdir(localepath):
+                paths.append(localepath)
+
+        # project/locale
+        parts = settings.SETTINGS_MODULE.split('.')
+        project = __import__(parts[0], {}, {}, [])
+        projectpath = os.path.join(os.path.dirname(project.__file__), 'locale')
+        localepaths = [os.path.normpath(path) for path in settings.LOCALE_PATHS]
+        if (projectpath and os.path.isdir(projectpath) and
+            os.path.normpath(projectpath) not in localepaths):
+            paths.append(os.path.join(os.path.dirname(project.__file__), 'locale'))
+
+        # project/app/locale
+        for appname in settings.INSTALLED_APPS:
+            appname = str(appname)  # to avoid a fail in __import__ sentence
+            p = appname.rfind('.')
+            if p >= 0:
+                app = getattr(__import__(appname[:p], {}, {}, [appname[p + 1:]]), appname[p + 1:])
+            else:
+                app = __import__(appname, {}, {}, [])
+
+            apppath = os.path.join(os.path.dirname(app.__file__), 'locale')
+
+            if os.path.isdir(apppath):
+                paths.append(apppath)
+
+    # django/locale
+    if include_djangos:
+        paths.append(os.path.join(os.path.dirname(sys.modules[settings.__module__].__file__), 'locale'))
+
+    return paths
+
+
+def find_pos(lang, include_djangos=False):
     """
     scans a couple possible repositories of gettext catalogs for the given
     language code
 
     """
 
-    paths = []
-
-    # project/locale
-    parts = settings.SETTINGS_MODULE.split('.')
-    project = __import__(parts[0], {}, {}, [])
-    paths.append(os.path.join(os.path.dirname(project.__file__), 'locale'))
-
-    # django/locale
-    if include_djangos:
-        paths.append(os.path.join(os.path.dirname(sys.modules[settings.__module__].__file__), 'locale'))
-
-    # settings
-    for localepath in settings.LOCALE_PATHS:
-        if os.path.isdir(localepath):
-            paths.append(localepath)
-
-    # project/app/locale
-    for appname in reversed(settings.INSTALLED_APPS):
-        appname = str(appname) # to avoid a fail in __import__ sentence
-        p = appname.rfind('.')
-        if p >= 0:
-            app = getattr(__import__(appname[:p], {}, {}, [appname[p+1:]]), appname[p+1:])
-        else:
-            app = __import__(appname, {}, {}, [])
-
-        apppath = os.path.join(os.path.dirname(app.__file__), 'locale')
-
-        if os.path.isdir(apppath):
-            paths.append(apppath)
+    paths = get_ordered_path_list(include_djangos)
 
     ret = []
-    rx=re.compile(r'(\w+)/../\1')
+    rx = re.compile(r'(\w+)/../\1')
     langs = (lang, )
     if u'-' in lang:
         _l, _c = map(lambda x: x.lower(), lang.split(u'-'))
-        langs += (u'%s_%s' %(_l, _c), u'%s_%s' %(_l, _c.upper()), )
+        langs += (u'%s_%s' % (_l, _c), u'%s_%s' % (_l, _c.upper()), )
     elif u'_' in lang:
         _l, _c = map(lambda x: x.lower(), lang.split(u'_'))
-        langs += (u'%s-%s' %(_l, _c), u'%s-%s' %(_l, _c.upper()), )
+        langs += (u'%s-%s' % (_l, _c), u'%s-%s' % (_l, _c.upper()), )
 
     for path in paths:
         for lang_ in langs:
             dirname = rx.sub(r'\1', '%s/%s/LC_MESSAGES/' % (path, lang_))
             for fn in ('django.po', 'djangojs.po', ):
-                if os.path.isfile(dirname+fn) and os.path.abspath((dirname+fn)) not in ret:
-                    ret.append(os.path.abspath(dirname+fn))
+                if os.path.isfile(dirname + fn) and os.path.abspath((dirname + fn)) not in ret:
+                    ret.append(os.path.abspath(dirname + fn))
     return ret
