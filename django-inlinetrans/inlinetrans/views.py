@@ -116,7 +116,11 @@ def do_restart(request):
 
         elif reload_method.startswith('restart_script'):
             command = ' '.join(reload_method.split(" ")[1:])
-        os.system("sleep 2 && %s &> %s & " % (command, reload_log))
+        if os.path.exists(os.path.dirname(reload_log)):
+            os.system("sleep 2 && %s &> %s & " % (command, reload_log))
+        else:
+            print 'The AUTO_RELOAD_LOG directory do not exist'  # Just in case our stdout is logged somewhere
+            os.system("sleep 2 && %s & " % command)
 
         return render_to_response('inlinetrans/response.html',
                                   {'message': reload_time},
