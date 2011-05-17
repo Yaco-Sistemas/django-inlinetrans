@@ -57,7 +57,10 @@ class InlineTranslateNode(Node):
             output = self.filter_expression.resolve(context)
             return _render_value_in_context(output, context)
 
-        msgid = self.filter_expression.resolve(context)
+        if getattr(self.filter_expression.var, 'literal'):
+            msgid = self.filter_expression.var.literal
+        else:
+            msgid = self.filter_expression.resolve(context)
         cat = copy.copy(catalog())
         cat.add_fallback(NotTranslated)
         styles = ['translatable']
