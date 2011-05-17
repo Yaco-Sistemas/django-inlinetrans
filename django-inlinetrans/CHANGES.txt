@@ -1,3 +1,9 @@
+0.4.11 (2011-05-17)
+-------------------
+
+- Do not try to log server restarts if the log file doesn't exist
+- Fix double translation problem when template nodes are cached
+
 0.4.10 (2011-04-18)
 -------------------
 
