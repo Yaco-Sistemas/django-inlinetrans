@@ -1,0 +1,46 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-09-12 06:02-0500\n"
+"PO-Revision-Date: 2013-09-12 06:23\n"
+"Last-Translator: <admin@es.es>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
+"X-Translated-Using: inlinetrans 0.4.0\n"
+
+#: templates/app/base.html:16
+msgid "Please <a href=\"/admin/\">log in</a> and return to this page"
+msgstr "Por favor <a href=\"/admin/\">autenticate</a> y vuelve a esta página"
+
+#: templates/app/index.html:10
+msgid "Index"
+msgstr "Indice"
+
+#: templates/app/index.html:19
+msgid "Change language"
+msgstr "Cambiar idioma"
+
+#: templates/app/index.html:26
+msgid "When you are authenticated."
+msgstr "Cuando tu estes autenticado"
+
+#: templates/app/index.html:29
+msgid "Hello"
+msgstr "Hola"
+
+#: templates/app/index.html:32
+msgid "Hi"
+msgstr "Hola"
+
+#: templates/app/index.html:35
+msgid "My car is red"
+msgstr ""

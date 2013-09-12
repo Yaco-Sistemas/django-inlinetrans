@@ -1,0 +1,37 @@
+{% extends "app/base.html" %}
+
+{% load i18n inlinetrans %}
+
+{% block extrahead %}
+    {% inlinetrans_media %}
+    {% inlinetrans_toolbar "inlinetrans-toolbar" %}
+{% endblock %}
+
+{% block content-title %}{% trans "Index" %}{% endblock %}
+{% block content-index %}{% endblock %}
+
+{% block page %}
+    <div id="inlinetrans-toolbar"></div>
+    {{ block.super }}
+{% endblock %}
+
+{% block content %}
+    {% itrans "Change language" %}
+    <ul>
+    {% for lang_code, lang_text in LANGUAGES %}
+        <li><a href=".?set_language={{ lang_code }}">{{ lang_text }}</a></li>
+    {% endfor %}
+    </ul>
+    <p>
+        {% if user.is_anonymous %}{% trans "When you are authenticated." %}{% endif %}
+    </p>
+    <p>
+        {% itrans "Hello" %}
+    </p>
+    <p>
+        {% itrans "Hi" %}
+    </p>
+    <p>
+        {% itrans "My car is red" %}
+    </p>
+{% endblock %}
