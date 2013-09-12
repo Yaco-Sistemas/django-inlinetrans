@@ -1,3 +1,0 @@
-# svn propset svn:externals -F EXTERNALS.txt  .
-
-inlinetrans https://django-inlinetrans.googlecode.com/svn/trunk/django-inlinetrans/inlinetrans
