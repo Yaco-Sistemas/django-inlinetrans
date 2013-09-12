@@ -20,7 +20,6 @@ def set_new_translation(request):
     """
     Post to include a new translation for a msgid
     """
-
     if not request.user.is_staff:
         return HttpResponseForbidden(_('You have no permission to update translation catalogs'))
     if not request.POST:
@@ -84,14 +83,6 @@ def set_new_translation(request):
     return HttpResponse(simplejson.dumps(result), mimetype='text/plain')
 
 
-def inline_demo(request):
-    """
-    """
-    return render_to_response('inlinetrans/inline_demo.html',
-                              {'INLINETRANS_MEDIA_URL': settings.MEDIA_URL + 'inlinetrans/'},
-                              context_instance=RequestContext(request))
-
-
 def do_restart(request):
     """
     * "test" for a django instance (this do a touch over settings.py for reload)
@@ -106,7 +97,7 @@ def do_restart(request):
         reload_time = get_auto_reload_time()
         command = "echo no script"
         if reload_method == 'test':
-            command = 'touch settings.py'
+            command = 'touch %s' % os.path.join(settings.BASEDIR, 'settings.py')
         ## No RedHAT or similars
         elif reload_method == 'apache2':
             command = 'sudo apache2ctl restart'

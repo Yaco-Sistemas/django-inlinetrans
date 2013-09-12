@@ -2,6 +2,7 @@ import copy
 
 from django import template
 from django.conf import settings
+from django.core.urlresolvers import reverse
 from django.template.loader import render_to_string
 from django.template import TemplateSyntaxError, TokenParser, Node, Variable
 try:
@@ -16,8 +17,15 @@ from django.utils.translation.trans_real import catalog
 register = template.Library()
 
 
-def get_media_url():
-    return getattr(settings, 'INLINETRANS_MEDIA_URL', settings.MEDIA_URL + 'inlinetrans/')
+def get_static_url(subfix='inlinetrans'):
+    static_prefix = getattr(settings, 'INLINETRANS_STATIC_URL', None)
+    if static_prefix:
+        return static_prefix
+    static_prefix = getattr(settings, 'INLINETRANS_MEDIA_URL', None)
+    if static_prefix:
+        return static_prefix
+    static_url = getattr(settings, 'STATIC_URL', getattr(settings, 'MEDIA_URL'))
+    return '%s%s/' % (static_url, subfix)
 
 
 def get_language_name(lang):
@@ -101,7 +109,7 @@ register.tag('itrans', inline_trans)
 def inlinetrans_media(context):
     tag_context = {
         'is_staff': False,
-        'INLINETRANS_MEDIA_URL': get_media_url(),
+        'INLINETRANS_MEDIA_URL': get_static_url(),
         'request': context['request'],
     }
     if 'user' in context and context['user'].is_staff:
@@ -115,8 +123,10 @@ def inlinetrans_media(context):
 @register.inclusion_tag('inlinetrans/inline_toolbar.html', takes_context=True)
 def inlinetrans_toolbar(context, node_id):
     tag_context = {
-        'INLINETRANS_MEDIA_URL': get_media_url(),
+        'INLINETRANS_MEDIA_URL': get_static_url(),
         'request': context['request'],
+        'set_new_translation_url': reverse('inlinetrans.views.set_new_translation'),
+        'do_restart_url': reverse('inlinetrans.views.do_restart'),
     }
     if 'user' in context and context['user'].is_staff:
         tag_context.update({
@@ -127,7 +137,7 @@ def inlinetrans_toolbar(context, node_id):
     else:
         tag_context.update({
             'is_staff': False,
-            'INLINETRANS_MEDIA_URL': get_media_url(),
+            'INLINETRANS_MEDIA_URL': get_static_url(),
             'request': context['request'],
         })
     return tag_context

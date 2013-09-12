@@ -13,8 +13,8 @@
        error_cant_restart: "{% trans "Can't restart server" %}"
 
     };
-    var new_translation_url = "{% url inlinetrans.views.set_new_translation %}";
-    var restart_url = "{% url inlinetrans.views.do_restart %}";
+    var new_translation_url = "{{ set_new_translation_url }}";
+    var restart_url = "{{ do_restart_url }}";
 
     var toolbar_tpl = '\
         <div class="inlinetransContainer">\

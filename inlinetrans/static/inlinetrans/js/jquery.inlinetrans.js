@@ -13,7 +13,11 @@
             
             var do_ajax = function(item, msgid, msgstr, retry) {
                 active_loading();
-                var jsondata = $.param({msgid:msgid, msgstr:msgstr, retry:retry});
+                var jsondata = $.param({msgid:msgid,
+                                        msgstr:msgstr,
+                                        retry:retry,
+                                        csrfmiddlewaretoken:csrf_token
+                });
                 $.ajax({
                     data: jsondata,
                     url: new_translation_url,
@@ -130,7 +134,9 @@
                         $(this).toggleClass("active");
                         active_loading();
                         $.ajax({
-                                data: {restart: 1},
+                                data: {restart: 1,
+                                       csrfmiddlewaretoken: csrf_token
+                                },
                                 url: restart_url,
                                 type: "POST",
                                 async: true,
