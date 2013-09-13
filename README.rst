@@ -34,7 +34,7 @@ To use inlinetrans, you need:
 Demo (this video use a very old version of django-inlinetrans)
 ==============================================================
 
-Video Demo, of `django-inlinetrans <http://pypi.python.org/pypi/django-inlinetrans>`_,`django-inplaceedit <http://pypi.python.org/pypi/django-inplaceedit>`_ and `django-inplaceedit-extra-fields <http://pypi.python.org/pypi/django-inplaceedit-extra-fields>`_ (Set full screen mode to view it correctly)
+Video Demo, of `django-inlinetrans <http://pypi.python.org/pypi/django-inlinetrans>`_, `django-inplaceedit <http://pypi.python.org/pypi/django-inplaceedit>`_ and `django-inplaceedit-extra-fields <http://pypi.python.org/pypi/django-inplaceedit-extra-fields>`_ (Set full screen mode to view it correctly)
 
 
 .. image:: https://github.com/Yaco-Sistemas/django-inplaceedit/raw/master/video-frame.png
