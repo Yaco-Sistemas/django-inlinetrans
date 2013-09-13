@@ -1,6 +1,12 @@
 Introduction
 ============
 
+.. image:: https://badge.fury.io/py/django-inlinetrans.png
+    :target: https://badge.fury.io/py/django-inlinetrans
+
+.. image:: https://pypip.in/d/django-inlinetrans/badge.png
+    :target: https://pypi.python.org/pypi/django-inlinetrans
+
 Inlinetrans is a django application that allows the translation of django templates from the rendered html in the browser. Once you have your templates internationalized with inlinetrans, you can click on the untranslated messages in their corresponding web pages to add their translations. This can be of great help for translators, as they will be able to translate the messages right in their intended context.
 
 Features
@@ -21,30 +27,28 @@ Requirements
 
 To use inlinetrans, you need:
 
-- Jquery >= 1.2.6
+- `Django <https://www.djangoproject.com/>`_ >= 1.0
+- `jQuery <http://jquery.com/>`_ >= 1.2.6
 
 Using inlinetrans
 =================
 
-Make sure media from inlinetrans is accessible in path::
-
-   >>> {{ MEDIA_URL }}inlinetrans
-
-You need to do a checkout of inlinetrans media on media path of your project or setting property externals on your media path::
-
-   >>> svn checkout http://django-inlinetrans.googlecode.com/svn/trunk/inlinetrans/media inlinetrans
 
 Make sure you load inlinetrans in all templates you want to internationalize, by adding the following code::
 
     >>>
     {% load inlinetrans %}
-    {% inlinetrans_media %}
+    {% inlinetrans_static %}
     <div id="inlinetrans-toolbar">place holder for inlinetrans toolbar</div>
     {% inlinetrans_toolbar "inlinetrans-toolbar" %}
 
 Then, you can use::
 
     >>> {% inline_trans "translate this" %}
+
+Or::
+
+    >>> {% itrans "translate this" %}
 
 Instead of::
 
@@ -57,33 +61,33 @@ Also, you can customize the toolbar and other parameters using inlinetrans as fo
     {% inlinetrans_media %}
 
     <script language="javascript">
-    (function ($) {
-    $(document).ready(function () {
-        var messages_dict = {
-            givetranslationfor: 'Give a new translation for {0} to {{ language }}',
-            emptytranslation: "You're sending an empty translation ¿Are you sure? ",
-            reloading: "Reloading",
-            apply_changes: "Apply changes",
-            applying_changes: "Applying changes",
-            error_cant_send: "Can't send translation",
-            error_cant_restart: "Can't restart server"
-        };
-        var new_translation_url = "{% url inlinetrans.views.set_new_translation %}";
-        var restart_url = "{% url inlinetrans.views.do_restart %}";
+        (function ($) {
+            $(document).ready(function () {
+                var messages_dict = {
+                    givetranslationfor: 'Give a new translation for {0} to {{ language }}',
+                    emptytranslation: "You're sending an empty translation ¿Are you sure? ",
+                    reloading: "Reloading",
+                    apply_changes: "Apply changes",
+                    applying_changes: "Applying changes",
+                    error_cant_send: "Can't send translation",
+                    error_cant_restart: "Can't restart server"
+                };
+                var new_translation_url = "{% url inlinetrans.views.set_new_translation %}";
+                var restart_url = "{% url inlinetrans.views.do_restart %}";
 
-        var toolbar_tpl = '\
-            <div class="inlinetransContainer">\
-                <img id="changes-loading" src="{{ INLINETRANS_MEDIA_URL }}img/ajax-loader-transparent.gif"/>\
-                <span class="inlinetransActions">\
-                    <span class="inlinetransAction hightlightTrans">See translatable items</span>\
-                    <span class="inlinetransAction hightlightNotrans">See non translated items</span>\
-                    <span class="inlinetransAction restartServer">Apply changes</span>\
-                </span>\
-            </div>';
-        // init inlinetrans toolbar
-        $('#{{ node_id }}').inlinetranstoolbar(toolbar_tpl, new_translation_url, restart_url, messages_dict);
-    });
-    })(jQuery);
+                var toolbar_tpl = '\
+                    <div class="inlinetransContainer">\
+                        <img id="changes-loading" src="{{ INLINETRANS_MEDIA_URL }}img/ajax-loader-transparent.gif"/>\
+                        <span class="inlinetransActions">\
+                            <span class="inlinetransAction hightlightTrans">See translatable items</span>\
+                            <span class="inlinetransAction hightlightNotrans">See non translated items</span>\
+                            <span class="inlinetransAction restartServer">Apply changes</span>\
+                        </span>\
+                    </div>';
+                // init inlinetrans toolbar
+                $('#{{ node_id }}').inlinetranstoolbar(toolbar_tpl, new_translation_url, restart_url, messages_dict);
+            });
+        })(jQuery);
     </script>
 
 Inlinetrans adds html code to each translation, so make sure you don't use **inline_trans** tags inside html attributes, such as this::
@@ -96,6 +100,6 @@ Once your template is internationalized, you run the following command::
 
     >>> $ ./manage.py inline_makemessages
 
-This extracts both **inline_trans** and **trans** messages from the templates, and incorporates them to the gettext catalogs, just as makemessages does for **trans** messages.
+This extracts both **inline_trans** (itrans) and **trans** messages from the templates, and incorporates them to the gettext catalogs, just as makemessages does for **trans** messages.
 
 Afterwords, you can start your server, navigate to the rendered pages (as a staff member), and, as explained above, translate the messages through the web.
