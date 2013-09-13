@@ -14,6 +14,7 @@
     <p>
         {% if user.is_anonymous %}
             {% blocktrans %}Please <a href="/admin/">log in</a> and return to this page{% endblocktrans %}
+            {% trans "When you are authenticated." %}
         {% endif %}
     </p>
     {% block content %}
