@@ -1,6 +1,7 @@
 include README.rst
 include CHANGES.rst
 include COPYING.LGPLv3
+include CONTRIBUTORS.rst
 include *.py
 recursive-include inlinetrans/templates *
 recursive-include inlinetrans/static *

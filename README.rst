@@ -12,9 +12,9 @@ Inlinetrans is a django application that allows the translation of django templa
 Features
 ========
 
-- A templatetag, **inline_trans**, intended as a replacement for django's **trans**.
+- A templatetag, **inline_trans** (or **itrans**), intended as a replacement for django's **trans**.
 - A management command, **inline_makemessage**, intended as a replacement for django's **makemessages**.
-- A translation bar to show translatable messages, by default visible only to *staff* members.
+- A translation bar to show translatable messages, by default visible only to *staff* members (you can change this behavior with the variable USER_CAN_TRANSLATE, add it in the settings)
 
 To translate the messages in a web page rendered in your browser, you first find out, through the translation bar, which messages have already been translated (marked light green) and which ones lack translation (marked light red).
 
@@ -102,4 +102,4 @@ Once your template is internationalized, you run the following command::
 
 This extracts both **inline_trans** (itrans) and **trans** messages from the templates, and incorporates them to the gettext catalogs, just as makemessages does for **trans** messages.
 
-Afterwords, you can start your server, navigate to the rendered pages (as a staff member), and, as explained above, translate the messages through the web.
+Afterwords, you can start your server, navigate to the rendered pages (by default, as a staff member), and, as explained above, translate the messages through the web.

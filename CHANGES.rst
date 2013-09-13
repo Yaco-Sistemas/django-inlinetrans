@@ -1,3 +1,15 @@
+0.5.0 (2013-09-13)
+------------------
+
+- Django 1.5 (1.4, 1.3 and 1.2) compatible, before does not work because csrf token protection
+- Python 3 compatible
+- Use the statics file, django-inlinetrans used media files still
+- Remove polib frozen, now this is a dependence
+- Remove code of inline_makemessages, now fix the problem with monkey patching
+- Now we can customize with a setting that users can inline translate
+- Add example project
+- Add meta info
+
 0.4.12 (2011-05-23)
 -------------------
 
