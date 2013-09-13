@@ -1,4 +1,5 @@
 import copy
+import sys
 
 from django import template
 from django.conf import settings
@@ -12,6 +13,12 @@ except ImportError: # Django 1.1 fallback
 
 from django.utils.translation import get_language
 from django.utils.translation.trans_real import catalog
+
+
+if sys.version_info.major == 2:
+    string = basestring
+else:
+    string = str
 
 
 register = template.Library()
@@ -50,7 +57,7 @@ class InlineTranslateNode(Node):
     def __init__(self, filter_expression, noop):
         self.noop = noop
         self.filter_expression = filter_expression
-        if isinstance(self.filter_expression.var, basestring):
+        if isinstance(self.filter_expression.var, string):
             self.filter_expression.var = Variable(u"'%s'" % self.filter_expression.var)
 
     def render(self, context):
@@ -73,8 +80,11 @@ class InlineTranslateNode(Node):
         cat.add_fallback(NotTranslated)
         styles = ['translatable']
         try:
-            msgstr = cat.ugettext(msgid)
-        except ValueError:
+            if sys.version_info.major == 2:
+                msgstr = cat.ugettext(msgid)
+            else:
+                msgstr = cat.gettext(msgid)
+        except (ValueError, AttributeError):
             styles.append("untranslated")
             msgstr = msgid
         return render_to_string('inlinetrans/inline_trans.html',
@@ -106,10 +116,11 @@ register.tag('itrans', inline_trans)
 
 
 @register.inclusion_tag('inlinetrans/inline_header.html', takes_context=True)
-def inlinetrans_media(context):
+def inlinetrans_static(context):
     tag_context = {
         'is_staff': False,
-        'INLINETRANS_MEDIA_URL': get_static_url(),
+        'INLINETRANS_STATIC_URL': get_static_url(),
+        'INLINETRANS_MEDIA_URL': get_static_url(),  # backward compatible
         'request': context['request'],
     }
     if 'user' in context and context['user'].is_staff:
@@ -120,10 +131,16 @@ def inlinetrans_media(context):
     return tag_context
 
 
+@register.inclusion_tag('inlinetrans/inline_header.html', takes_context=True)
+def inlinetrans_media(context):  # backward compatible
+    return inlinetrans_static(context)
+
+
 @register.inclusion_tag('inlinetrans/inline_toolbar.html', takes_context=True)
 def inlinetrans_toolbar(context, node_id):
     tag_context = {
-        'INLINETRANS_MEDIA_URL': get_static_url(),
+        'INLINETRANS_STATIC_URL': get_static_url(),
+        'INLINETRANS_MEDIA_URL': get_static_url(),  # backward compatible
         'request': context['request'],
         'set_new_translation_url': reverse('inlinetrans.views.set_new_translation'),
         'do_restart_url': reverse('inlinetrans.views.do_restart'),
@@ -137,7 +154,8 @@ def inlinetrans_toolbar(context, node_id):
     else:
         tag_context.update({
             'is_staff': False,
-            'INLINETRANS_MEDIA_URL': get_static_url(),
+            'INLINETRANS_STATIC_URL': get_static_url(),
+            'INLINETRANS_MEDIA_URL': get_static_url(),  # backward compatible
             'request': context['request'],
         })
     return tag_context

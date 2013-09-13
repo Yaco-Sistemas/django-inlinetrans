@@ -1,17 +1,18 @@
 import os
 import datetime
+import inlinetrans
 
 from django.conf import settings
+from django.core.management.commands import makemessages
 from django.http import HttpResponseBadRequest, HttpResponse, HttpResponseForbidden
 from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.utils import simplejson
 from django.utils.encoding import smart_str
 from django.utils.translation import get_language, ugettext as _
-import inlinetrans
 
-from inlinetrans.management.commands.inline_makemessages import make_messages
-from inlinetrans.polib import pofile
+from polib import pofile
+
 from inlinetrans.utils import validate_format, find_pos
 from inlinetrans.settings import get_auto_reload_method, get_auto_reload_log, get_auto_reload_time
 
@@ -29,8 +30,7 @@ def set_new_translation(request):
     else:
         result = {'errors': True,
                   'question': False,
-                  'message': _('Unknow error'),
-                 }
+                  'message': _('Unknow error')}
         selected_pofile = None
         msgid = smart_str(request.POST['msgid'])
         msgstr = smart_str(request.POST['msgstr'])
@@ -41,7 +41,7 @@ def set_new_translation(request):
         if retry != 'false':
             root_path = os.path.dirname(os.path.normpath(os.sys.modules[settings.SETTINGS_MODULE].__file__))
             locale_path = os.path.dirname(os.path.normpath(os.sys.modules[settings.SETTINGS_MODULE].__file__))
-            make_messages(lang, extensions=['.html'], root_path=root_path, locale_path=locale_path)
+            makemessages(lang, extensions=['.html'], root_path=root_path, locale_path=locale_path)
 
         pos = find_pos(lang, include_djangos=True)
         if pos:
@@ -110,9 +110,8 @@ def do_restart(request):
         if os.path.exists(os.path.dirname(reload_log)):
             os.system("sleep 2 && %s &> %s & " % (command, reload_log))
         else:
-            print 'The AUTO_RELOAD_LOG directory do not exist'  # Just in case our stdout is logged somewhere
+            print('The AUTO_RELOAD_LOG directory do not exist')  # Just in case our stdout is logged somewhere
             os.system("sleep 2 && %s & " % command)
-
         return render_to_response('inlinetrans/response.html',
                                   {'message': reload_time},
                                   context_instance=RequestContext(request))
