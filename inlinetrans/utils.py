@@ -25,15 +25,18 @@ import subprocess
 
 def validate_format(pofile):
     errors = []
-    handle, temp_file = tempfile.mkstemp()
+    handle, temp_file_po = tempfile.mkstemp(suffix='.po')
+    handle, temp_file_mo = tempfile.mkstemp(suffix='.mo')
     os.close(handle)
-    pofile.save(temp_file)
+    pofile.save(temp_file_po)
 
-    cmd = ['msgfmt', '--check-format', temp_file]
+    cmd = ['msgfmt',
+           '--check-format', temp_file_po,
+           '--output-file', temp_file_mo]
     process = subprocess.Popen(cmd, stderr=subprocess.PIPE)
     out, err = process.communicate()
     if process.returncode != 0:
-        input_lines = open(temp_file, 'r').readlines()
+        input_lines = open(temp_file_po, 'r').readlines()
         error_lines = err.strip().split('\n')
         # discard last line since it only says the number of fatal errors
         error_lines = error_lines[:-1]
@@ -49,7 +52,8 @@ def validate_format(pofile):
 
         errors = [format_error_line(line) for line in error_lines]
 
-    os.unlink(temp_file)
+    os.unlink(temp_file_po)
+    os.unlink(temp_file_mo)
     return errors
 
 
