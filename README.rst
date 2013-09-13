@@ -30,6 +30,16 @@ To use inlinetrans, you need:
 - `Django <https://www.djangoproject.com/>`_ >= 1.0
 - `jQuery <http://jquery.com/>`_ >= 1.2.6
 
+
+Demo (this video use a very old version of django-inlinetrans)
+==============================================================
+
+Video Demo, of `django-inlinetrans <http://pypi.python.org/pypi/django-inlinetrans>`_,`django-inplaceedit <http://pypi.python.org/pypi/django-inplaceedit>`_ and `django-inplaceedit-extra-fields <http://pypi.python.org/pypi/django-inplaceedit-extra-fields>`_ (Set full screen mode to view it correctly)
+
+
+.. image:: https://github.com/Yaco-Sistemas/django-inplaceedit/raw/master/video-frame.png
+   :target: http://www.youtube.com/watch?v=_EjisXtMy_Y
+
 Using inlinetrans
 =================
 

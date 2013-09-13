@@ -1,3 +1,8 @@
+0.5.1 (2013-09-13)
+------------------
+
+- Improvements in metainfo (readme file, and contributors file)
+
 0.5.0 (2013-09-13)
 ------------------
 
