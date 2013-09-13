@@ -29,14 +29,15 @@ from django.utils.translation import get_language, ugettext as _
 from polib import pofile
 
 from inlinetrans.utils import validate_format, find_pos
-from inlinetrans.settings import get_auto_reload_method, get_auto_reload_log, get_auto_reload_time
+from inlinetrans.settings import (get_auto_reload_method, get_auto_reload_log,
+                                  get_auto_reload_time, get_user_can_translate)
 
 
 def set_new_translation(request):
     """
     Post to include a new translation for a msgid
     """
-    if not request.user.is_staff:
+    if not get_user_can_translate(request.user):
         return HttpResponseForbidden(_('You have no permission to update translation catalogs'))
     if not request.POST:
         return HttpResponseBadRequest(render_to_response('inlinetrans/response.html',
@@ -106,7 +107,7 @@ def do_restart(request):
     * "wsgi"
     * "restart_script <script_path_name>"
     """
-    if request.user.is_staff:
+    if get_user_can_translate(request.user):
         reload_method = get_auto_reload_method()
         reload_log = get_auto_reload_log()
         reload_time = get_auto_reload_time()

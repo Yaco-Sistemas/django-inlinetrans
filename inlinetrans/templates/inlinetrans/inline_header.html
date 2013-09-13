@@ -1,4 +1,4 @@
-{% if is_staff %}
+{% if can_translate %}
     <link rel="stylesheet" type="text/css" href="{{ INLINETRANS_STATIC_URL }}css/inlinetrans.css"/>
     <script language="javascript" src="{{ INLINETRANS_STATIC_URL }}js/jquery.inlinetrans.js"></script>
     {% include "inlinetrans/inc.csrf_token.html" %}

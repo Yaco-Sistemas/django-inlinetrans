@@ -1,33 +1,34 @@
-{% load i18n %}{% if is_staff %}
+{% load i18n %}
 
-<script language="javascript">
-(function ($) {
-  $(document).ready(function () {
-    var messages_dict = {
-       givetranslationfor: '{% trans "Give a new translation for " %} "{0}" {% trans "to" %} {{ language }}',
-       emptytranslation: "{% trans "You're sending an empty translation ¿Are you sure? " %}",
-       reloading: "{% trans "Reloading" %}",
-       apply_changes: "{% trans "Apply changes" %}",
-       applying_changes: "{% trans "Applying changes" %}",
-       error_cant_send: "{% trans "Can't send translation" %}",
-       error_cant_restart: "{% trans "Can't restart server" %}"
+{% if can_translate %}
+    <script language="javascript">
+        (function ($) {
+            $(document).ready(function () {
+                var messages_dict = {
+                givetranslationfor: '{% trans "Give a new translation for " %} "{0}" {% trans "to" %} {{ language }}',
+                emptytranslation: "{% trans "You're sending an empty translation ¿Are you sure? " %}",
+                reloading: "{% trans "Reloading" %}",
+                apply_changes: "{% trans "Apply changes" %}",
+                applying_changes: "{% trans "Applying changes" %}",
+                error_cant_send: "{% trans "Can't send translation" %}",
+                error_cant_restart: "{% trans "Can't restart server" %}"
 
-    };
-    var new_translation_url = "{{ set_new_translation_url }}";
-    var restart_url = "{{ do_restart_url }}";
+                };
+                var new_translation_url = "{{ set_new_translation_url }}";
+                var restart_url = "{{ do_restart_url }}";
 
-    var toolbar_tpl = '\
-        <div class="inlinetransContainer">\
-            <img id="changes-loading" src="{{ INLINETRANS_STATIC_URL }}img/ajax-loader-transparent.gif"/>\
-            <span class="inlinetransActions">\
-                <span class="inlinetransAction hightlightTrans">{% trans "See translatable items" %}</span>\
-                <span class="inlinetransAction hightlightNotrans">{% trans "See non translated items" %}</span>\
-                <span class="inlinetransAction restartServer">{% trans "Apply changes" %}</span>\
-            </span>\
-        </div>';
-    // init inlinetrans toolbar
-    $('#{{ node_id }}').inlinetranstoolbar(toolbar_tpl, new_translation_url, restart_url, messages_dict);
-  });
-})(jQuery);
-</script>
+                var toolbar_tpl = '\
+                    <div class="inlinetransContainer">\
+                        <img id="changes-loading" src="{{ INLINETRANS_STATIC_URL }}img/ajax-loader-transparent.gif"/>\
+                        <span class="inlinetransActions">\
+                            <span class="inlinetransAction hightlightTrans">{% trans "See translatable items" %}</span>\
+                            <span class="inlinetransAction hightlightNotrans">{% trans "See non translated items" %}</span>\
+                            <span class="inlinetransAction restartServer">{% trans "Apply changes" %}</span>\
+                        </span>\
+                    </div>';
+                // init inlinetrans toolbar
+                $('#{{ node_id }}').inlinetranstoolbar(toolbar_tpl, new_translation_url, restart_url, messages_dict);
+            });
+        })(jQuery);
+    </script>
 {% endif %}

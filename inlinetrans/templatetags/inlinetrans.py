@@ -23,11 +23,13 @@ from django.template.loader import render_to_string
 from django.template import TemplateSyntaxError, TokenParser, Node, Variable
 try:
     from django.template.base import _render_value_in_context
-except ImportError: # Django 1.1 fallback
+except ImportError:   # Django 1.1 fallback
     from django.template import _render_value_in_context
 
 from django.utils.translation import get_language
 from django.utils.translation.trans_real import catalog
+
+from ..settings import get_user_can_translate
 
 
 if sys.version_info.major == 2:
@@ -82,7 +84,7 @@ class InlineTranslateNode(Node):
             user = getattr(context.get('request'), 'user', None)
         else:
             user = None
-        if not (user and user.is_staff):
+        if not (user and get_user_can_translate(user)):
             self.filter_expression.var.translate = not self.noop
             output = self.filter_expression.resolve(context)
             return _render_value_in_context(output, context)
@@ -133,14 +135,17 @@ register.tag('itrans', inline_trans)
 @register.inclusion_tag('inlinetrans/inline_header.html', takes_context=True)
 def inlinetrans_static(context):
     tag_context = {
-        'is_staff': False,
+        'can_translate': False,
+        'is_staff': False,  # backward compatible
         'INLINETRANS_STATIC_URL': get_static_url(),
         'INLINETRANS_MEDIA_URL': get_static_url(),  # backward compatible
         'request': context['request'],
     }
-    if 'user' in context and context['user'].is_staff:
+    user = context.get('user', None)
+    if user and get_user_can_translate(user):
         tag_context.update({
-            'is_staff': True,
+            'can_translate': True,
+            'is_staff': True,  # backward compatible
             'language': get_language_name(get_language()),
         })
     return tag_context
@@ -160,15 +165,18 @@ def inlinetrans_toolbar(context, node_id):
         'set_new_translation_url': reverse('inlinetrans.views.set_new_translation'),
         'do_restart_url': reverse('inlinetrans.views.do_restart'),
     }
-    if 'user' in context and context['user'].is_staff:
+    user = context.get('user', None)
+    if user and get_user_can_translate(user):
         tag_context.update({
-            'is_staff': True,
+            'can_translate': True,
+            'is_staff': True,  # backward compatible
             'language': get_language_name(get_language()),
             'node_id': node_id,
         })
     else:
         tag_context.update({
-            'is_staff': False,
+            'can_translate': False,
+            'is_staff': False,  # backward compatible
             'INLINETRANS_STATIC_URL': get_static_url(),
             'INLINETRANS_MEDIA_URL': get_static_url(),  # backward compatible
             'request': context['request'],

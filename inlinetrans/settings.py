@@ -29,6 +29,7 @@ Options for this settings::
 DEFAULT_AUTO_RELOAD_METHOD = 'test'
 DEFAULT_AUTO_RELOAD_TIME = '5'
 DEFAULT_AUTO_RELOAD_LOG = 'var/log/autoreload_last.log'
+DEFAULT_USER_CAN_TRANSLATE = lambda user: user.is_staff
 
 
 def get_auto_reload_method():
@@ -53,3 +54,11 @@ def get_auto_reload_log():
         return settings.AUTO_RELOAD_LOG
     else:
         return DEFAULT_AUTO_RELOAD_LOG
+
+
+def get_user_can_translate(user):
+    from django.conf import settings
+    if hasattr(settings, 'USER_CAN_TRANSLATE'):
+        return settings.USER_CAN_TRANSLATE(user)
+    else:
+        return DEFAULT_USER_CAN_TRANSLATE(user)
