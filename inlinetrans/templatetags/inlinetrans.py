@@ -32,7 +32,7 @@ from django.utils.translation.trans_real import catalog
 from ..settings import get_user_can_translate
 
 
-if sys.version_info.major == 2:
+if sys.version_info[0] == 2:
     string = basestring
 else:
     string = str

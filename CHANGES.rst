@@ -1,3 +1,10 @@
+0.6.0 (2013-10-04)
+------------------
+
+- Support to python2.6 (It was not supported with django-inlinetrans==0.5.X)
+- Improvements in the example project
+
+
 0.5.1 (2013-09-13)
 ------------------
 

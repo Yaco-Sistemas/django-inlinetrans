@@ -1,16 +1,3 @@
-import os
-import datetime
-import inlinetrans
-
-from django.conf import settings
-from django.core.management.commands import makemessages
-from django.http import HttpResponseBadRequest, HttpResponse, HttpResponseForbidden
-from django.template import RequestContext
-from django.shortcuts import render_to_response
-from django.utils import simplejson
-from django.utils.encoding import smart_str
-from django.utils.translation import get_language, ugettext as _
-
 # Copyright (c) 2010-2013 by Yaco Sistemas <ant30tx@gmail.com> or <goinnn@gmail.com>
 #
 # This program is free software: you can redistribute it and/or modify
@@ -25,6 +12,19 @@ from django.utils.translation import get_language, ugettext as _
 #
 # You should have received a copy of the GNU Lesser General Public License
 # along with this programe.  If not, see <http://www.gnu.org/licenses/>.
+
+import os
+import datetime
+import inlinetrans
+
+from django.conf import settings
+from django.core.management.commands import makemessages
+from django.http import HttpResponseBadRequest, HttpResponse, HttpResponseForbidden
+from django.template import RequestContext
+from django.shortcuts import render_to_response
+from django.utils import simplejson
+from django.utils.encoding import smart_str
+from django.utils.translation import get_language, ugettext as _
 
 from polib import pofile
 
