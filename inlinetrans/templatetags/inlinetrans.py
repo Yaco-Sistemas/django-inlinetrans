@@ -97,7 +97,7 @@ class InlineTranslateNode(Node):
         cat.add_fallback(NotTranslated)
         styles = ['translatable']
         try:
-            if sys.version_info.major == 2:
+            if sys.version_info[0] == 2:
                 msgstr = cat.ugettext(msgid)
             else:
                 msgstr = cat.gettext(msgid)
